@@ -13,6 +13,16 @@ pub fn char_to_bits(c: char) -> [u8; 8] {
     return bits;
 }
 
+pub fn bits_to_char(bits: [u8; 8]) -> char {
+    let mut byte: u8 = 0u8;
+
+    for i in 0..8 {
+      byte = byte | bits[i] << (7 - i);
+    }
+
+    return byte as char;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -30,5 +40,12 @@ mod tests {
         assert_eq!(char_to_bits('A'), [0, 1, 0, 0, 0, 0, 0, 1]);
         assert_eq!(char_to_bits('B'), [0, 1, 0, 0, 0, 0, 1, 0]);
         assert_eq!(char_to_bits('C'), [0, 1, 0, 0, 0, 0, 1, 1]);
+    }
+
+    #[test]
+    fn should_convert_bits_to_char() {
+        assert_eq!(bits_to_char([0, 1, 0, 0, 0, 0, 0, 1]), 'A');
+        assert_eq!(bits_to_char([0, 1, 0, 0, 0, 0, 1, 0]), 'B');
+        assert_eq!(bits_to_char([0, 1, 0, 0, 0, 0, 1, 1]), 'C');
     }
 }
