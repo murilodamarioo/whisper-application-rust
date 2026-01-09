@@ -2,6 +2,17 @@ pub fn flip_last_bit(byte: u8) -> u8 {
     return byte ^ 1;
 }
 
+pub fn char_to_bits(c: char) -> [u8; 8] {
+    let byte: u8 = c as u8;
+    let mut bits: [u8; 8] = [0u8; 8];
+
+    for i in 0..8 {
+        bits[i] = (byte >> (7 - i)) & 1;
+    }
+
+    return bits;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -12,5 +23,12 @@ mod tests {
         assert_eq!(flip_last_bit(0b00000001), 0b00000000);
         assert_eq!(flip_last_bit(254), 255);
         assert_eq!(flip_last_bit(255), 254);
+    }
+
+    #[test]
+    fn should_convert_char_to_bits() {
+        assert_eq!(char_to_bits('A'), [0, 1, 0, 0, 0, 0, 0, 1]);
+        assert_eq!(char_to_bits('B'), [0, 1, 0, 0, 0, 0, 1, 0]);
+        assert_eq!(char_to_bits('C'), [0, 1, 0, 0, 0, 0, 1, 1]);
     }
 }
