@@ -23,6 +23,26 @@ pub fn bits_to_char(bits: [u8; 8]) -> char {
     return byte as char;
 }
 
+
+pub fn print_whisper_art() {
+    let cyan = "\x1b[36m";
+    let reset = "\x1b[0m";
+    
+    let whisper_art = r#"
+  ██╗    ██╗██╗  ██╗██╗███████╗██████╗ ███████╗██████╗ 
+  ██║    ██║██║  ██║██║██╔════╝██╔══██╗██╔════╝██╔══██╗
+  ██║ █╗ ██║███████║██║███████╗██████╔╝█████╗  ██████╔╝
+  ██║███╗██║██╔══██║██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗
+  ╚███╔███╔╝██║  ██║██║███████║██║     ███████╗██║  ██║
+   ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
+    "#;
+    
+    println!("{}{}{}", cyan, whisper_art, reset);
+}
+
+// Uso:
+// print_whisper_art(cyan, reset);
+
 #[cfg(test)]
 mod tests {
     use super::*;
